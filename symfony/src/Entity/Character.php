@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CharacterRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -42,6 +44,16 @@ class Character
      * @ORM\Column(type="smallint")
      */
     private $age;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=TvShow::class, inversedBy="characters")
+     */
+    private $tvShows;
+
+    public function __construct()
+    {
+        $this->tvShows = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -104,6 +116,30 @@ class Character
     public function setAge(int $age): self
     {
         $this->age = $age;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|TvShow[]
+     */
+    public function getTvShows(): Collection
+    {
+        return $this->tvShows;
+    }
+
+    public function addTvShow(TvShow $tvShow): self
+    {
+        if (!$this->tvShows->contains($tvShow)) {
+            $this->tvShows[] = $tvShow;
+        }
+
+        return $this;
+    }
+
+    public function removeTvShow(TvShow $tvShow): self
+    {
+        $this->tvShows->removeElement($tvShow);
 
         return $this;
     }
