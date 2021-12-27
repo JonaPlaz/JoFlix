@@ -59,6 +59,7 @@ class AppFixtures extends Fixture
       $tvShow = new TvShow();
       $tvShow->setTitle($faker->unique()->tvShow());
       $tvShow->setSynopsis($faker->unique()->overview());
+      $tvShow->setImage($faker->imageUrl(640, 480, 'Tv Show', true));
       $tvShow->setNbLikes(mt_rand(0, 400000));
       $tvShow->setPublishedAt(new \DateTimeImmutable());
       $tvShow->setCreatedAt(new \DateTimeImmutable());
@@ -207,6 +208,7 @@ class AppFixtures extends Fixture
       $tvShow = new TvShow();
       $tvShow->setTitle($faker->unique()->movie());
       $tvShow->setSynopsis($faker->unique()->overview());
+      $tvShow->setImage($faker->imageUrl(640, 480, 'Movie', true));
       $tvShow->setNbLikes(mt_rand(0, 400000));
       $tvShow->setPublishedAt(new \DateTimeImmutable());
       $tvShow->setCreatedAt(new \DateTimeImmutable());
