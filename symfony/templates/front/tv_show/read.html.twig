@@ -36,13 +36,9 @@
               {# https://twig.symfony.com/doc/2.x/filters/nl2br.html #}
               {{ tvShow.synopsis|nl2br }}
             </p>
-            <div class="d-flex mb-4" style="color: orange;">
-              <i class="bi bi-star-fill"></i>
-              <i class="bi bi-star-fill"></i>
-              <i class="bi bi-star-fill"></i>
-              <i class="bi bi-star-fill"></i>
-              <i class="bi bi-star-half"></i>
-              <span class="ps-1">4.8</span>
+            <div class="d-flex" style="color: orange;">
+              <i class="bi bi-hand-thumbs-up-fill"></i>
+              <span class="ps-1">{{ tvShow.nbLikes }}</span>
             </div>
 
             {# https://twig.symfony.com/doc/2.x/filters/length.html #}
@@ -68,15 +64,11 @@
               </dt>
               <dd class="col-sm-12">
                 {% for character in tvShow.characters %}
-                  Acteur {{ tvShow.id }} ({{ character.firstname }} {{
+                  {{ character.actor }} ({{ character.firstname }} {{
                     character.lastname
                   }})<br />
                 {% endfor %}
               </dd>
-              <dt class="col-sm-12">
-                Pays
-              </dt>
-              <dd class="col-sm-12">USA</dd>
               <dt class="col-sm-12">
                 Année
               </dt>
