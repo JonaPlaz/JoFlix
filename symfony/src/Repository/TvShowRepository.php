@@ -14,15 +14,52 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class TvShowRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+  public function __construct(ManagerRegistry $registry)
+  {
+    parent::__construct($registry, TvShow::class);
+  }
+
+  /**
+   * Retourne toutes les séries dont le titre
+   * contient la valeur de $searchTerm
+   * 
+   * @return TvShow[] Returns an array of TvShow objects
+   */
+  public function findAllBySearchTerm($searchTerm)
+  {
+    return
+      $this->createQueryBuilder('tvshow')
+      ->andWhere('tvshow.title LIKE :searchTerm')
+      ->setParameter(':searchTerm', "%$searchTerm%")
+      ->getQuery()
+      ->getResult();
+  }
+
+  /**
+     * display 3 random tvshows on the homepage
+     *! doesn'work
+     *
+     * @return TvShow[] Returns an array of Shop objects
+     */
+    public function findHomeTvShows()
     {
-        parent::__construct($registry, TvShow::class);
+
+        $manager = $this->getEntityManager();
+        $query = $manager->createQuery(
+            'SELECT tvshow
+            FROM App\Entity\TvShow tvshow
+            ORDER BY RAND()
+            '
+        )
+            ->setMaxResults(3);
+
+        return $query->getResult();
     }
 
-    // /**
-    //  * @return TvShow[] Returns an array of TvShow objects
-    //  */
-    /*
+  // /**
+  //  * @return TvShow[] Returns an array of TvShow objects
+  //  */
+  /*
     public function findByExampleField($value)
     {
         return $this->createQueryBuilder('t')
@@ -36,6 +73,7 @@ class TvShowRepository extends ServiceEntityRepository
     }
     */
 
+  /*
     /*
     public function findOneBySomeField($value): ?TvShow
     {

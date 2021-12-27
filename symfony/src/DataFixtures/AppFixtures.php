@@ -14,6 +14,7 @@ use Faker\Factory;
 use PointPlus\FakerCinema\Provider\Character as FakerCharacter;
 use PointPlus\FakerCinema\Provider\Movie;
 use PointPlus\FakerCinema\Provider\TvShow as FakerTvShow;
+use PointPlus\FakerCinema\Provider\Person;
 
 class AppFixtures extends Fixture
 {
@@ -26,12 +27,34 @@ class AppFixtures extends Fixture
     $faker->addProvider(new FakerCharacter($faker));
     $faker->addProvider(new Movie($faker));
     $faker->addProvider(new FakerTvShow($faker));
+    $faker->addProvider(new Person($faker));
+
+
+    $categories = [];
 
     // 7 categories created in DB
     for ($i = 0; $i < 7; $i++) {
       $category = new Category;
       $category->setName($faker->unique()->movieGenre());
       $manager->persist($category);
+
+      $categories[] = $category;
+    }
+
+    $characters = [];
+
+    // 50 characters created in DB
+    for ($i = 0; $i < 150; $i++) {
+      $character = new Character();
+      $character->setFirstname($faker->firstNameMale());
+      $character->setLastname($faker->unique()->lastName());
+      $character->setActor($faker->unique()->actor());
+      $character->setGender($faker->randomElement(['Homme', 'Femme']));
+      $character->setBio($faker->sentence(5));
+      $character->setAge(mt_rand(4, 80));
+      $manager->persist($character);
+
+      $characters[] = $character;
     }
 
     // 25 male characters created in DB
@@ -40,16 +63,6 @@ class AppFixtures extends Fixture
       $character->setFirstname($faker->firstNameMale());
       $character->setLastname($faker->unique()->lastName());
       $character->setGender('Homme');
-      $character->setAge(mt_rand(4, 80));
-      $manager->persist($character);
-    }
-
-    // 25 female characters created in DB
-    for ($i = 0; $i < 25; $i++) {
-      $character = new Character();
-      $character->setFirstname($faker->firstNameFemale());
-      $character->setLastname($faker->unique()->lastName());
-      $character->setGender('Femme');
       $character->setAge(mt_rand(4, 80));
       $manager->persist($character);
     }
@@ -64,6 +77,11 @@ class AppFixtures extends Fixture
       $tvShow->setPublishedAt(new \DateTimeImmutable());
       $tvShow->setCreatedAt(new \DateTimeImmutable());
       $tvShow->setUpdatedAt(new \DateTimeImmutable());
+      $tvShow->addCharacter($faker->randomElement($characters));
+      $tvShow->addCharacter($faker->randomElement($characters));
+      $tvShow->addCharacter($faker->randomElement($characters));
+      $tvShow->addCategory($faker->randomElement($categories));
+      $tvShow->addCategory($faker->randomElement($categories));
 
       // seasons by tvshow created in DB
       $seasonOne = new Season();
@@ -230,6 +248,14 @@ class AppFixtures extends Fixture
       $episode->setUpdatedAt(new \DateTimeImmutable());
 
       $tvShow->addSeason($season);
+      $tvShow->addCharacter($faker->unique()->randomElement($characters));
+      $tvShow->addCharacter($faker->randomElement($characters));
+      $tvShow->addCharacter($faker->randomElement($characters));
+      $tvShow->addCharacter($faker->randomElement($characters));
+      $tvShow->addCategory($faker->randomElement($categories));
+      $tvShow->addCategory($faker->randomElement($categories));
+      $tvShow->addCategory($faker->randomElement($categories));
+      $tvShow->addCategory($faker->randomElement($categories));
       $season->addEpisode($episode);
 
       $manager->persist($tvShow);

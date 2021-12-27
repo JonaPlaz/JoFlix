@@ -1,0 +1,91 @@
+html,
+body {
+  height: 100%;
+}
+
+html {
+  overflow-y: scroll;
+}
+
+.h-md-300 {
+  height: 300px;
+}
+
+.movie__poster {
+  background-position: center;
+  background-size: cover;
+}
+
+.movie__poster img {
+  width: 100%;
+  /* height: 300px;
+    object-fit: cover;
+    object-position: top; */
+}
+
+.movie__favorite {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.form-md {
+  width: 100%;
+  max-width: 400px;
+  padding: 15px;
+  margin: auto;
+}
+
+.form-signin .checkbox {
+  font-weight: 400;
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-signin input[type='email'] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type='password'] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.bg-oflix {
+  background-color: #fecc00;
+}
+
+/* search nav button */
+.search {
+  border: 1px solid #00ce1b;
+  color: #00ce1b;
+}
+
+.search:hover {
+  background-color: #00ce1b;
+}
+
+/* categories homepage */
+.categories {
+  border: 1px solid #00ce1b;
+  color: #00ce1b;
+}
+
+.categories:hover {
+  background-color: #00ce1b;
+}
+
+/* pictures homepage */
+.pictures {
+  height: 50%;
+}
+
+/* links tvshow read */
+.links {
+  color: #00ce1b;
+}

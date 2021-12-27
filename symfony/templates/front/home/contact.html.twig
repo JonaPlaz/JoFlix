@@ -1,0 +1,22 @@
+{% extends "front/base.html.twig" %}
+
+{% block body %}
+
+<h1>Formulaire de contact</h1>
+
+{{ form_start(form) }}
+    {# On affiche les messages d'erreur de vvalidation du formulaire #}
+    {{ form_errors(form) }}
+
+    {{ form_row(form.sender) }}
+    {{ form_row(form.subject) }}
+
+    {# form_row() est une fonction qui va afficher à sa façon l'équivalent de
+     form_label()+form_errors()+form_widget()+form_help() #}
+    {{ form_label(form.message) }}<br>
+    {{ form_widget(form.message) }}
+    {{ form_row(form.submit) }}    
+
+{{ form_end(form) }}
+
+{% endblock %}

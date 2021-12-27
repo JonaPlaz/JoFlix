@@ -20,7 +20,7 @@ class SearchController extends AbstractController
   {
     $searchTerm = $request->get('search');
 
-    $results = $tvShowRepository->findAllBySearchTermDQL($searchTerm);
+    $results = $tvShowRepository->findAllBySearchTerm($searchTerm);
 
     return $this->render('front/search/results.html.twig', [
       'results' => $results,

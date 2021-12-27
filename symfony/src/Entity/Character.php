@@ -50,6 +50,11 @@ class Character
      */
     private $tvShows;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $actor;
+
     public function __construct()
     {
         $this->tvShows = new ArrayCollection();
@@ -140,6 +145,18 @@ class Character
     public function removeTvShow(TvShow $tvShow): self
     {
         $this->tvShows->removeElement($tvShow);
+
+        return $this;
+    }
+
+    public function getActor(): ?string
+    {
+        return $this->actor;
+    }
+
+    public function setActor(?string $actor): self
+    {
+        $this->actor = $actor;
 
         return $this;
     }
