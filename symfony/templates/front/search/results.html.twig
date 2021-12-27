@@ -1,0 +1,21 @@
+{% extends 'front/base.html.twig' %}
+
+{% block title %}
+Recherche du terme {{ searchTerm }}
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Résultats pour le terme {{ searchTerm }}</h1>
+    <ul>
+    {% for tvShow in results %}        
+        <li>
+        {# uncomment when is created #}
+        {# <a href="{{ path('tvshow_read', {id:tvShow.id}) }}">
+            {{ tvShow.title }}
+        </a> #}
+        </li>
+    {% endfor %}
+    </ul>
+</div>
+{% endblock %}
