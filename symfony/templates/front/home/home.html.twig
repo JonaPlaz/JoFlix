@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'front/base.html.twig' %}
 
 {% block title %}O'flix{% endblock %}
 
@@ -61,10 +61,9 @@
                             <i class="bi bi-star-half"></i>
                             <span class="ps-1">4.8</span>
                         </div>
-                         {# uncomment when is created #}
-                        {# <a href="{{ path('tvshow_read', {id:tvShow.id}) }}" class="fs-1 mt-3 text-danger align-self-start">
+                        <a href="{{ path('tvshow_read', {id:tvShow.id}) }}" class="fs-1 mt-3 text-danger align-self-start">
                             <i class="bi bi-arrow-right-square"></i>
-                        </a> #}
+                        </a>
                     </div>
                 </div>
                 {% endfor %}
