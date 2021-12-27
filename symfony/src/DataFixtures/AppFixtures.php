@@ -57,6 +57,16 @@ class AppFixtures extends Fixture
       $characters[] = $character;
     }
 
+    // 25 male characters created in DB
+    for ($i = 0; $i < 25; $i++) {
+      $character = new Character();
+      $character->setFirstname($faker->firstNameMale());
+      $character->setLastname($faker->unique()->lastName());
+      $character->setGender('Homme');
+      $character->setAge(mt_rand(4, 80));
+      $manager->persist($character);
+    }
+
     // TvShow tvshows created in DB
     for ($i = 0; $i < 10; $i++) {
       $tvShow = new TvShow();
