@@ -14,6 +14,7 @@ use Faker\Factory;
 use PointPlus\FakerCinema\Provider\Character as FakerCharacter;
 use PointPlus\FakerCinema\Provider\Movie;
 use PointPlus\FakerCinema\Provider\TvShow as FakerTvShow;
+use PointPlus\FakerCinema\Provider\Person;
 
 class AppFixtures extends Fixture
 {
@@ -26,6 +27,7 @@ class AppFixtures extends Fixture
     $faker->addProvider(new FakerCharacter($faker));
     $faker->addProvider(new Movie($faker));
     $faker->addProvider(new FakerTvShow($faker));
+    $faker->addProvider(new Person($faker));
 
 
     $categories = [];
@@ -46,6 +48,7 @@ class AppFixtures extends Fixture
       $character = new Character();
       $character->setFirstname($faker->firstNameMale());
       $character->setLastname($faker->unique()->lastName());
+      $character->setActor($faker->unique()->actor());
       $character->setGender($faker->randomElement(['Homme', 'Femme']));
       $character->setBio($faker->sentence(5));
       $character->setAge(mt_rand(4, 80));
