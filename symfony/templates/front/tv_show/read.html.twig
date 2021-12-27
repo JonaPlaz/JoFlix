@@ -1,77 +1,90 @@
-{% extends "front/base.html.twig" %}
+{% extends 'front/base.html.twig' %}
 
 {% block title %}
-{{ tvShow.title }}
+  {{ tvShow.title }}
 {% endblock %}
 
 {% block body %}
-<div class="container bg-lighttt pt-5">
+  <div class="container bg-lighttt pt-5">
+    <div class="row mb-2">
+      <div class="col">
+        <div class="row g-0 borderrr rrrounded overflow-hidden flex-md-row align-items-start mb-4 shadow-smmm position-relative">
+          <div class="col-4 movie__poster img-thumbnail">
+            <img src="{{ tvShow.image }}" class="img-fluid" />
+          </div>
 
-        <div class="row mb-2">
-
-            <div class="col">
-
-                <div class="row g-0 borderrr rrrounded overflow-hidden flex-md-row align-items-start mb-4 shadow-smmm position-relative">
-                    <div class="col-4 movie__poster img-thumbnail">
-                        <img src="{{ tvShow.image }}" class="img-fluid">
-                    </div>
-
-                    <div class="col-8 p-4 d-flex flex-column position-static bg-light">
-                        <a href="" class="movie__favorite fs-1 my-2 mx-3 link-danger"><i class="bi bi-bookmark-plus"></i></a>
-                        <strong class="d-inline-block mb-2 text-primary">Film</strong>
-                        <h3 class="mb-1">{{ tvShow.title }}</h3>
-                        <div class="mb-1 text-muted">93 min</div>
-                        <p>
-                            {% for category in tvShow.categories %}                              
-                            <span class="badge bg-warning text-dark">{{ category.name }}</span>
-                            {% endfor %}
-                        </p>
-                        <p>
-                          {# https://twig.symfony.com/doc/2.x/filters/nl2br.html  #}
-                          {{ tvShow.synopsis | nl2br }}
-                        </p>
-                        <div class="d-flex mb-4" style="color: orange;">
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-half"></i>
-                            <span class="ps-1">4.8</span>
-                        </div>
-
-                        {# https://twig.symfony.com/doc/2.x/filters/length.html #}
-                        <h2>{{ tvShow.seasons | length }} Saison(s)</h2>
-                        <ul class="list-unstyled">
-                            {% for season in tvShow.seasons %}                              
-                            <li>
-                              <span class="badge bg-danger fs-6 mb-2">
-                              Saison {{ season.seasonNumber }}
-                              </span>
-                              <small class="ms-1">({{ season.episodes | length }} épisode(s))</small>
-                            </li>
-                            {% endfor %}
-                        </ul>
-
-                        <dl class="row">
-                            <dt class="col-sm-12">Avec</dt>
-                            <dd class="col-sm-12">
-                                {% for character in tvShow.characters %}                                  
-                                  Acteur {{ tvShow.id }} ({{ character.firstname }} {{ character.lastname }})<br> 
-                                {% endfor %}
-                            </dd>
-                            <dt class="col-sm-12">Pays</dt>
-                            <dd class="col-sm-12">USA</dd>
-                            <dt class="col-sm-12">Année</dt>
-                            <dd class="col-sm-12">1998</dd>
-                        </dl>
-
-                    </div>
-                </div>
-
+          <div class="col-8 p-4 d-flex flex-column position-static bg-light">
+            <a href="" class="movie__favorite fs-1 my-2 mx-3 link-danger">
+              <i class="bi bi-bookmark-plus"></i>
+            </a>
+            {% if (tvShow.seasons|length) == 1 %}
+              <strong class="d-inline-block mb-2 text-primary">Film</strong>
+            {% else %}
+              <strong class="d-inline-block mb-2 text-primary">Série</strong>
+            {% endif %}
+            <h3 class="mb-1">
+              {{ tvShow.title }}
+            </h3>
+            <p>
+              {% for category in tvShow.categories %}
+                <span class="badge bg-warning text-dark">
+                  {{ category.name }}
+                </span>
+              {% endfor %}
+            </p>
+            <p>
+              {# https://twig.symfony.com/doc/2.x/filters/nl2br.html #}
+              {{ tvShow.synopsis|nl2br }}
+            </p>
+            <div class="d-flex mb-4" style="color: orange;">
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-half"></i>
+              <span class="ps-1">4.8</span>
             </div>
 
+            {# https://twig.symfony.com/doc/2.x/filters/length.html #}
+            <h2>
+              {{ tvShow.seasons|length }} Saison(s)
+            </h2>
+            <ul class="list-unstyled">
+              {% for season in tvShow.seasons %}
+                <li>
+                  <span class="badge bg-danger fs-6 mb-2">
+                    Saison {{ season.seasonNumber }}
+                  </span>
+                  <small class="ms-1">
+                    ({{ season.episodes|length }} épisode(s))
+                  </small>
+                </li>
+              {% endfor %}
+            </ul>
+
+            <dl class="row">
+              <dt class="col-sm-12">
+                Avec
+              </dt>
+              <dd class="col-sm-12">
+                {% for character in tvShow.characters %}
+                  Acteur {{ tvShow.id }} ({{ character.firstname }} {{
+                    character.lastname
+                  }})<br />
+                {% endfor %}
+              </dd>
+              <dt class="col-sm-12">
+                Pays
+              </dt>
+              <dd class="col-sm-12">USA</dd>
+              <dt class="col-sm-12">
+                Année
+              </dt>
+              <dd class="col-sm-12">1998</dd>
+            </dl>
+          </div>
         </div>
-
+      </div>
     </div>
-
+  </div>
 {% endblock %}

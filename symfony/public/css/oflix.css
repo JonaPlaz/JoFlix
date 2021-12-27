@@ -1,63 +1,73 @@
 html,
 body {
-    height: 100%;
+  height: 100%;
 }
 
 html {
-    overflow-y: scroll;
+  overflow-y: scroll;
 }
 
 .h-md-300 {
-    height: 300px;
+  height: 300px;
 }
 
 .movie__poster {
-    background-position: center;
-    background-size: cover;
+  background-position: center;
+  background-size: cover;
 }
 
 .movie__poster img {
-    width: 100%;
-    /* height: 300px;
+  width: 100%;
+  /* height: 300px;
     object-fit: cover;
     object-position: top; */
 }
 
 .movie__favorite {
-    position: absolute;
-    top: 0;
-    right: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 .form-md {
-    width: 100%;
-    max-width: 400px;
-    padding: 15px;
-    margin: auto;
+  width: 100%;
+  max-width: 400px;
+  padding: 15px;
+  margin: auto;
 }
 
 .form-signin .checkbox {
-    font-weight: 400;
+  font-weight: 400;
 }
 
 .form-signin .form-floating:focus-within {
-    z-index: 2;
+  z-index: 2;
 }
 
-.form-signin input[type="email"] {
-    margin-bottom: -1px;
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
+.form-signin input[type='email'] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
 }
 
-.form-signin input[type="password"] {
-    margin-bottom: 10px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+.form-signin input[type='password'] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 }
 
 .bg-oflix {
-    background-color: #fecc00;
+  background-color: #fecc00;
+}
+
+/* search nav button */
+.search {
+  border: 1px solid #00ce1b;
+  color: #00ce1b;
+}
+
+.search:hover {
+  background-color: #00ce1b;
 }
 
 /* categories homepage */
@@ -72,7 +82,7 @@ html {
 
 /* pictures homepage */
 .pictures {
-  height: 80%;
+  height: 50%;
 }
 
 /* links tvshow read */
