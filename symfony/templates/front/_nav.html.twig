@@ -2,8 +2,7 @@
   <div class="container-fluid">
     <a href="./"
       class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none header-logo">
-      <img src="{{ asset('favicon.png') }}" height="24" alt="Logo O'flix" />
-      <span class="header-logo__title">O'flix</span>
+      <img src="{{ asset('favicon.png') }}" height="50" alt="Logo O'flix" />
     </a>
     <button class="navbar-toggler"
       type="button"
@@ -17,15 +16,16 @@
           <a class="nav-link active" href="{{ path('home') }}">Accueil</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="./list.html">
+          <a class="nav-link" href="{{ path('tvshow_browse') }}">
             <i class="bi bi-film"></i> Films, séries TV
           </a>
         </li>
-        <li class="nav-item">
+        {# à gérer quand un user pourra mettre ses films en favoris #}
+        {# <li class="nav-item">
           <a class="nav-link" href="./favorites.html">
             <i class="bi bi-bookmark"></i> Ma liste
           </a>
-        </li>
+        </li> #}
       </ul>
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         {# app.user fournit l'utilisateur connecté ou la valeur null s'il ne l'est pas #}
