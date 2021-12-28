@@ -70,9 +70,9 @@
                 {% endfor %}
               </dd>
               <dt class="col-sm-12">
-                Année
+                Publié le
               </dt>
-              <dd class="col-sm-12">1998</dd>
+              <dd class="col-sm-12">{{ tvShow.publishedAt|date("d/m/Y") }}</dd>
             </dl>
           </div>
         </div>
