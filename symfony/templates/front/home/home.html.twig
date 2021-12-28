@@ -53,6 +53,9 @@
               <p>
                 <small>{{ tvShow.synopsis }}</small>
               </p>
+              <p>
+                Publié le {{ tvShow.publishedAt|date("d/m/Y") }}
+              </p>
               <div class="d-flex" style="color: orange;">
                 <i class="bi bi-hand-thumbs-up-fill"></i>
                 <span class="ps-1">{{ tvShow.nbLikes }}</span>
