@@ -1,0 +1,94 @@
+{% extends 'back/base.html.twig' %}
+
+{% block body %}
+  <div class="col-12">
+    <h1>
+      Liste des personnages
+    </h1>
+    <a href="{{ path('back_character_add') }}" class="fs-4"
+                ><i class="fa fa-plus-circle"></i></i></a>
+  </div>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">
+          ID
+        </th>
+        <th scope="col">
+          Prénom
+        </th>
+        <th scope="col">
+          Nom
+        </th>
+        <th scope="col">
+          Séries
+        </th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for character in characters %}
+        <tr class="table-{{ cycle(['primary', 'secondary'], loop.index) }}">
+          <th scope="row">
+            {{ character.id }}
+          </th>
+          <td>
+            {{ character.firstname }}
+          </td>
+          <td>
+            {{ character.lastname }}
+          </td>
+          <td>
+            {% for tvshow in character.tvshows %}
+              {{ tvshow.title }}{{ loop.last == false ? ', ' }}
+            {% endfor %}
+          </td>
+          <td>
+            <a href="{{
+              path(
+                'back_character_read',
+                {
+                  id: character.id
+                }
+              )
+              }}"
+              class="fs-4">
+              <i class="fa fa-eye" aria-hidden="true"></i>
+            </a>
+            <a href="{{
+              path(
+                'back_character_edit',
+                {
+                  id: character.id
+                }
+              )
+              }}"
+              class="fs-4">
+              <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+            </a>
+            <form action="{{
+              path(
+                'back_character_delete',
+                {
+                  id: character.id
+                }
+              )
+              }}"
+              class="d-inline"
+              method="post">
+              <button class="btn btn-link p-0 mb-2 fs-4">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+              </button>
+              <input type="hidden" name="_method" value="delete" />
+              {# On ajoute un token anti-csrf pour s'assurer que la requête reçue n'est pas forgée #}
+              <input type="hidden"
+                name="_token"
+                value="{{ csrf_token('delete_character' ~ character.id) }}" />
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "back/base.html.twig" %}
+
+{% block title %}{{ character.firstname }} {{ character.lastname }}{% endblock %}
+
+{% block body %}
+
+<div class="col-12">
+    <h1>{{ block('title') }}</h1>
+</div>
+
+<div class="col-8">
+    <ul>
+        <li>Genre : {{ character.gender }}</li>        
+        <li>Age : {{ character.age }}</li>
+        <li>Biographie : {{ character.bio }}</li>
+        <li>Séries ({{ character.tvShows|length }}) : 
+            {% for tvshow in character.tvShows %}
+                {{ tvshow.title }}{{ loop.last != true ? ',' }}
+            {% endfor %}
+        </li>
+    </ul>
+</div>
+
+{% endblock %}
