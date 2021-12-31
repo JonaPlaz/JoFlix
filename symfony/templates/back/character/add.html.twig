@@ -1,0 +1,17 @@
+{% extends 'back/base.html.twig' %}
+
+{% block title %}Hello CategoryController!{% endblock %}
+
+{% block body %}
+
+<div class="col-12">
+    <h1>Ajouter un personnage</h1>
+</div>
+
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    {# On peut tout à fait insérer le bouton dans le twig plutot que dans le formulaire #}
+    <button class="btn btn-danger">Ajouter</button>
+{{ form_end(form) }}
+
+{% endblock %}
