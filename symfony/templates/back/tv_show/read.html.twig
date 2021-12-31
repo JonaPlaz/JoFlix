@@ -1,0 +1,37 @@
+{% extends "back/base.html.twig" %}
+
+{% block title %}{{ tvshow.title }}{% endblock %}
+
+{% block body %}
+
+<div class="col-12">
+    <h1>{{ tvshow.title }}</h1>
+</div>
+
+<div class="col-4">
+    <p>{{ tvshow.synopsis }}</p>
+</div>
+
+<div class="col-4">
+    {% if tvshow.image is defined %}
+        <img src="{{ tvshow.image }}" alt="">
+    {% endif %}
+</div>
+
+<div class="col-4">
+    <ul>
+        <li>Likes : {{ tvshow.nbLikes }}</li>        
+        <li>Première diffusion : {{ tvshow.publishedAt|date('d-m-Y') }}</li>
+        <li>Création en BDD : {{ tvshow.createdAt|date('d-m-Y') }}</li>
+        <li>Dernière modification : {{ tvshow.updatedAt ? tvshow.createdAt|date('d-m-Y') }}</li>
+        <li>Saisons : {{ tvshow.seasons|length }}</li>
+        <li>Personnages : {{ tvshow.characters|length }}</li>
+        <li>Catégories ({{ tvshow.categories|length }}) : 
+            {% for category in tvshow.categories %}
+                {{ category.name }}{{ loop.last != true ? ',' }}
+            {% endfor %}
+        </li>
+    </ul>
+</div>
+
+{% endblock %}
