@@ -1,0 +1,100 @@
+{% extends 'back/base.html.twig' %}
+
+{% block title %}
+  Hello TvShowController!
+{% endblock %}
+
+{% block body %}
+  <div class="col-12">
+    <h1>
+      Liste des séries
+    </h1>
+    <a href="{{ path('back_season_add') }}" class="fs-4">
+      <i class="fa fa-plus-circle"></i>
+    </a>
+  </div>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">
+          ID
+        </th>
+        <th scope="col">
+          Titre
+        </th>
+        <th scope="col">
+          Création
+        </th>
+        <th scope="col">
+          Dernière modification
+        </th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for tvshow in tvshows %}
+        <tr class="table-{{ cycle(['primary', 'secondary'], loop.index) }}">
+          <th scope="row">
+            {{ tvshow.id }}
+          </th>
+          <td>
+            {{ tvshow.title }}
+          </td>
+          <td>
+            {{ tvshow.createdAt|date('Y-m-d H:i') }}
+          </td>
+          <td>
+            {{ tvshow.updatedAt ? tvshow.updatedAt|date('Y-m-d H:i') }}
+          </td>
+          <td>
+            <a href="{{
+              path(
+                'back_tv_show_read',
+                {
+                  id: tvshow.id
+                }
+              )
+              }}"
+              class="fs-4">
+              <i class="fa fa-eye" aria-hidden="true"></i>
+            </a>
+            {# On vérifie que l'utilisateur est un admin pour afficher ces liens #}
+            {% if is_granted('EDIT', tvshow) %}
+              <a href="{{
+                path(
+                  'back_tv_show_edit',
+                  {
+                    id: tvshow.id
+                  }
+                )
+                }}"
+                class="fs-4">
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+              </a>
+            {% endif %}
+            {% if is_granted('ROLE_ADMIN') %}
+              {# {% if is_granted('DELETE', tvshow) %} #}
+              <form action="{{
+                path(
+                  'back_tv_show_delete',
+                  {
+                    id: tvshow.id
+                  }
+                )
+                }}"
+                class="d-inline"
+                method="post">
+                <button class="btn btn-link p-0 mb-2 fs-4">
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+                </button>
+                <input type="hidden" name="_method" value="delete" />
+              </form>
+              {# <a href="{{ path('back_tv_show_delete', {id: tvshow.id}) }}"><i class="fa fa-trash" aria-hidden="true"></i></a> #}
+            {% endif %}
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
