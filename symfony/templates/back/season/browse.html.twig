@@ -1,0 +1,93 @@
+{% extends 'back/base.html.twig' %}
+
+{% block body %}
+  <div class="col-12">
+    <h1>
+      Liste des saisons
+    </h1>
+    <a href="{{ path('back_season_add') }}" class="fs-4"
+                ><i class="fa fa-plus-circle"></i></i></a>
+  </div>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">
+          ID
+        </th>
+        <th scope="col">
+          Série
+        </th>
+        <th scope="col">
+          Numéro de saison
+        </th>
+        <th scope="col">
+          Année de diffusion
+        </th>
+        <th scope="col">
+          Publication
+        </th>
+        <th scope="col">
+          Dernière modification
+        </th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for season in seasons %}
+        <tr class="table-{{ cycle(['primary', 'secondary'], loop.index) }}">
+          <th scope="row">
+            {{ season.id }}
+          </th>
+          <td>
+            {{ season.tvShow.title }}
+          </td>
+          <td>
+            {{ season.seasonNumber }}
+          </td>
+          <td>
+            {{ season.publishedAt|date('Y') }}
+          </td>
+          <td>
+            {{ season.PublishedAt|date('Y-m-d H:i') }}
+          </td>
+          <td>
+            {{ season.updatedAt ? season.updatedAt|date('Y-m-d H:i') }}
+          </td>
+          <td>
+            <a href="{{
+              path(
+                'back_season_edit',
+                {
+                  id: season.id
+                }
+              )
+              }}"
+              class="fs-4">
+              <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+            </a>
+            <form action="{{
+              path(
+                'back_season_delete',
+                {
+                  id: season.id
+                }
+              )
+              }}"
+              class="d-inline"
+              method="post">
+              <button class="btn btn-link p-0 mb-2 fs-4">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+              </button>
+              <input type="hidden" name="_method" value="delete" />
+              {# On ajoute un token anti-csrf pour s'assurer que la requête reçue n'est pas forgée #}
+              <input type="hidden"
+                name="_token"
+                value="{{ csrf_token('delete_season' ~ season.id) }}" />
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
