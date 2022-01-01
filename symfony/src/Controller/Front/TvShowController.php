@@ -58,7 +58,7 @@ class TvShowController extends AbstractController
    */
   public function readSlug(TvShow $tvShow): Response
   {
-    return $this->render('front/tvshow/read.html.twig', [
+    return $this->render('front/tv_show/read.html.twig', [
       'tvShow' => $tvShow
     ]);
   }
