@@ -8,6 +8,7 @@ use App\Entity\Episode;
 use App\Entity\Season;
 use App\Entity\TvShow;
 use App\Entity\User;
+use App\Service\Slugger;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
@@ -77,6 +78,7 @@ class AppFixtures extends Fixture
       $tvShow->setPublishedAt(new \DateTimeImmutable());
       $tvShow->setCreatedAt(new \DateTimeImmutable());
       $tvShow->setUpdatedAt(new \DateTimeImmutable());
+      $tvShow->setSlug($faker->slugifyTvShow($tvShow));
       $tvShow->addCharacter($faker->randomElement($characters));
       $tvShow->addCharacter($faker->randomElement($characters));
       $tvShow->addCharacter($faker->randomElement($characters));
