@@ -78,7 +78,6 @@ class AppFixtures extends Fixture
       $tvShow->setPublishedAt(new \DateTimeImmutable());
       $tvShow->setCreatedAt(new \DateTimeImmutable());
       $tvShow->setUpdatedAt(new \DateTimeImmutable());
-      $tvShow->setSlug($faker->slugifyTvShow($tvShow));
       $tvShow->addCharacter($faker->randomElement($characters));
       $tvShow->addCharacter($faker->randomElement($characters));
       $tvShow->addCharacter($faker->randomElement($characters));
