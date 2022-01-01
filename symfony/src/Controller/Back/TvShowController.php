@@ -5,7 +5,6 @@ namespace App\Controller\Back;
 use App\Entity\TvShow;
 use App\Form\TvShowType;
 use App\Repository\TvShowRepository;
-use App\Service\Slugger;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -41,7 +40,7 @@ class TvShowController extends AbstractController
   /**
    * @Route("/add", name="add")
    */
-  public function add(EntityManagerInterface $manager, Request $request, Slugger $slugger)
+  public function add(EntityManagerInterface $manager, Request $request)
   {
     $tvShow = new TvShow();
 
@@ -50,8 +49,6 @@ class TvShowController extends AbstractController
     $form->handleRequest($request);
 
     if ($form->isSubmitted() && $form->isValid()) {
-
-      $slugger->slugifyTvShow($tvShow);
 
       $manager->persist($tvShow);
       $manager->flush();
@@ -67,7 +64,7 @@ class TvShowController extends AbstractController
   /**
    * @Route("/edit/{id}", name="edit")
    */
-  public function edit(EntityManagerInterface $manager, Request $request, Slugger $slugger, TvShow $tvShow)
+  public function edit(EntityManagerInterface $manager, Request $request, TvShow $tvShow)
   {
     $this->denyAccessUnlessGranted('EDIT', $tvShow);
 
@@ -76,8 +73,6 @@ class TvShowController extends AbstractController
     $form->handleRequest($request);
 
     if ($form->isSubmitted() && $form->isValid()) {
-
-      $slugger->slugifyTvShow($tvShow);
 
       $manager->flush();
 
